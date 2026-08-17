@@ -5,11 +5,11 @@ export const site = {
   name: "Simarpreet Dhillon",
   // Rotating hero titles.
   roles: [
-    "DevOps Engineer",
-    "Site Reliability Engineer",
+    "Cloud DevOps Engineer",
+    "Site Reliability",
     "Platform Engineer",
-    "Infrastructure Engineer",
-    "MLOps-Platform Engineer",
+    "Infrastructure",
+    "MLOps-Platform",
   ],
   location: "Houston, TX",
   email: "simardhillonsd17@gmail.com",
@@ -143,7 +143,7 @@ export const experience: Job[] = [
     company: "DISH Networks",
     role: "Platform Engineer",
     location: "Dallas, TX",
-    period: "2024 — Present",
+    period: "2025 — Present",
     points: [
       "Architected a telco-grade AWS landing zone with Terraform and AWS CDK, automating secure VPC and EKS provisioning in under 45 minutes and eliminating 90% of manual configuration drift.",
       "Led a production GenAI/GraphRAG knowledge platform on AWS Bedrock — Step Functions/Fargate ingestion and LLMGateway integration powering citation-backed retrieval across a 1TB enterprise corpus.",
@@ -156,7 +156,7 @@ export const experience: Job[] = [
     company: "Gilead Sciences",
     role: "Infrastructure Engineer — MLOps",
     location: "Dallas, TX",
-    period: "2023 — 2024",
+    period: "2023 — 2025",
     points: [
       "Implemented a GxP-compliant AWS landing zone (VPC, Route 53, ALB, multi-AZ, CloudWatch governance) supporting 99.9% uptime for clinical-data platforms.",
       "Managed production Amazon EKS clusters hosting containerized bioinformatics apps with managed node pools for high-throughput genomic-data processing.",
