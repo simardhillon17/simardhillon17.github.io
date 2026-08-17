@@ -42,7 +42,7 @@ src/
   pages/index.astro   # the single page + all sections
   scripts/
     particles.ts      # hero canvas animation
-    main.ts           # rotator, scroll-reveal, mobile nav
+    main.ts           # rotator, scroll-reveal, mobile navv
   styles/global.css   # Tailwind + theme tokens
 public/               # static assets (resume.pdf, favicon, og image)
 ```
