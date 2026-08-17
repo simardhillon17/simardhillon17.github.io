@@ -1,0 +1,360 @@
+---
+import Base from "../layouts/Base.astro";
+import {
+  site,
+  skills,
+  experience,
+  projects,
+  certifications,
+  education,
+} from "../data/site";
+
+const navLinks = [
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<Base>
+  <!-- ===== Nav ===== -->
+  <header
+    class="fixed inset-x-0 top-0 z-50 border-b border-line/60 bg-bg/70 backdrop-blur-md"
+  >
+    <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <a href="#top" class="font-mono text-sm font-semibold text-heading">
+        <span class="text-accent">~/</span>simar
+      </a>
+
+      <ul class="hidden items-center gap-8 text-sm md:flex">
+        {
+          navLinks.map((l, i) => (
+            <li>
+              <a
+                href={l.href}
+                class="link-accent text-muted transition-colors hover:text-heading"
+              >
+                <span class="mr-1 font-mono text-xs text-accent">
+                  0{i + 1}.
+                </span>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a
+            href={site.socials.resume}
+            class="rounded border border-accent/60 px-3 py-1.5 font-mono text-xs text-accent transition-colors hover:bg-accent/10"
+          >
+            Resume
+          </a>
+        </li>
+      </ul>
+
+      <button
+        id="nav-toggle"
+        class="text-muted md:hidden"
+        aria-label="Toggle navigation"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </nav>
+
+    <div id="nav-menu" class="hidden border-t border-line/60 md:hidden">
+      <ul class="flex flex-col gap-1 px-6 py-4 text-sm">
+        {
+          navLinks.map((l) => (
+            <li>
+              <a href={l.href} class="block py-2 text-muted hover:text-heading">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a
+            href={site.socials.resume}
+            class="mt-2 inline-block rounded border border-accent/60 px-3 py-1.5 font-mono text-xs text-accent"
+          >
+            Resume
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== Hero ===== -->
+    <section class="relative flex min-h-screen items-center overflow-hidden">
+      <canvas id="hero-canvas" class="absolute inset-0 h-full w-full"></canvas>
+      <div class="bg-grid pointer-events-none absolute inset-0"></div>
+      <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-bg/40 to-bg"
+      >
+      </div>
+
+      <div class="relative mx-auto w-full max-w-5xl px-6">
+        <p class="mb-4 font-mono text-sm text-accent">Hi, my name is</p>
+        <h1
+          class="text-4xl font-bold tracking-tight text-heading sm:text-6xl lg:text-7xl"
+        >
+          {site.name}.
+        </h1>
+        <h2
+          class="mt-3 flex min-h-[1.5em] items-center text-2xl font-semibold text-muted sm:text-4xl lg:text-5xl"
+        >
+          <span
+            id="role-rotator"
+            class="text-accent"
+            data-roles={JSON.stringify(site.roles)}></span>
+          <span class="ml-1 inline-block w-[2px] animate-pulse self-stretch bg-accent"
+          ></span>
+        </h2>
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+          {site.tagline}
+        </p>
+
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a
+            href="#projects"
+            class="rounded-md border border-accent/60 px-5 py-3 font-mono text-sm text-accent transition-colors hover:bg-accent/10"
+          >
+            View my work
+          </a>
+          <a
+            href={`mailto:${site.email}`}
+            class="rounded-md px-5 py-3 font-mono text-sm text-muted transition-colors hover:text-heading"
+          >
+            Get in touch →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section id="about" class="mx-auto max-w-5xl px-6 py-24">
+      <h2 class="reveal mb-10 flex items-center gap-3 text-2xl font-bold text-heading">
+        <span class="font-mono text-lg text-accent">01.</span> About me
+        <span class="ml-4 hidden h-px flex-1 bg-line sm:block"></span>
+      </h2>
+      <div class="grid gap-10 md:grid-cols-3">
+        <div class="reveal md:col-span-2">
+          <p class="leading-relaxed text-muted">{site.summary}</p>
+          <p class="mt-6 leading-relaxed text-muted">
+            Based in {site.location}. Currently focused on GenAI platform
+            engineering — GraphRAG, AWS Bedrock, and the reliability tooling that
+            keeps ML systems in production.
+          </p>
+          <div class="mt-8">
+            <h3 class="mb-3 font-mono text-sm text-heading">Certifications</h3>
+            <ul class="space-y-2">
+              {
+                certifications.map((c) => (
+                  <li class="flex items-start gap-2 text-sm text-muted">
+                    <span class="mt-1 text-accent">▹</span>
+                    {c}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="rounded-lg border border-line bg-surface p-5">
+            <h3 class="mb-3 font-mono text-sm text-heading">Education</h3>
+            <ul class="space-y-4">
+              {
+                education.map((e) => (
+                  <li>
+                    <p class="text-sm font-medium text-text">{e.degree}</p>
+                    <p class="text-xs text-muted">{e.school}</p>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section id="skills" class="mx-auto max-w-5xl px-6 py-24">
+      <h2 class="reveal mb-10 flex items-center gap-3 text-2xl font-bold text-heading">
+        <span class="font-mono text-lg text-accent">02.</span> Skills
+        <span class="ml-4 hidden h-px flex-1 bg-line sm:block"></span>
+      </h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          skills.map((group) => (
+            <div class="reveal rounded-lg border border-line bg-surface p-5 transition-colors hover:border-accent/40">
+              <h3 class="mb-4 font-mono text-sm text-accent">{group.title}</h3>
+              <ul class="flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <li class="rounded border border-line bg-surface-2 px-2.5 py-1 text-xs text-muted">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ===== Experience ===== -->
+    <section id="experience" class="mx-auto max-w-5xl px-6 py-24">
+      <h2 class="reveal mb-10 flex items-center gap-3 text-2xl font-bold text-heading">
+        <span class="font-mono text-lg text-accent">03.</span> Experience
+        <span class="ml-4 hidden h-px flex-1 bg-line sm:block"></span>
+      </h2>
+      <div class="space-y-6">
+        {
+          experience.map((job) => (
+            <div class="reveal rounded-lg border border-line bg-surface p-6 transition-colors hover:border-accent/40">
+              <div class="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 class="text-lg font-semibold text-heading">
+                  {job.role}{" "}
+                  <span class="text-accent">@ {job.company}</span>
+                </h3>
+                <span class="font-mono text-xs text-muted">{job.period}</span>
+              </div>
+              <p class="mt-1 font-mono text-xs text-muted">{job.location}</p>
+              <ul class="mt-4 space-y-2.5">
+                {job.points.map((p) => (
+                  <li class="flex gap-3 text-sm leading-relaxed text-muted">
+                    <span class="mt-1 shrink-0 text-accent">▹</span>
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section id="projects" class="mx-auto max-w-5xl px-6 py-24">
+      <h2 class="reveal mb-10 flex items-center gap-3 text-2xl font-bold text-heading">
+        <span class="font-mono text-lg text-accent">04.</span> Projects
+        <span class="ml-4 hidden h-px flex-1 bg-line sm:block"></span>
+      </h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        {
+          projects.map((p) => {
+            const link = p.repo || p.href;
+            return (
+              <article class="reveal group flex flex-col rounded-lg border border-line bg-surface p-6 transition-colors hover:border-accent/40">
+                <div class="mb-4 flex items-center justify-between">
+                  <svg
+                    width="34"
+                    height="34"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    class="text-accent"
+                  >
+                    <path d="M4 7h16M4 7l2 12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1l2-12M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+                  </svg>
+                  {link && (
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-muted transition-colors hover:text-accent"
+                      aria-label={`Open ${p.name}`}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H8M17 7v9" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+                <h3 class="text-lg font-semibold text-heading">
+                  {link ? (
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="transition-colors group-hover:text-accent"
+                    >
+                      {p.name}
+                    </a>
+                  ) : (
+                    p.name
+                  )}
+                </h3>
+                <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                  {p.blurb}
+                </p>
+                <ul class="mt-5 flex flex-wrap gap-2">
+                  {p.stack.map((s) => (
+                    <li class="font-mono text-xs text-muted">{s}</li>
+                  ))}
+                </ul>
+              </article>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="mx-auto max-w-3xl px-6 py-28 text-center">
+      <p class="reveal mb-3 font-mono text-sm text-accent">05. What's next?</p>
+      <h2 class="reveal text-3xl font-bold text-heading sm:text-4xl">
+        Get in touch
+      </h2>
+      <p class="reveal mx-auto mt-5 max-w-xl leading-relaxed text-muted">
+        I'm open to platform, SRE, DevOps, and MLOps roles. Whether you have a
+        question or just want to talk infrastructure, my inbox is open.
+      </p>
+      <div class="reveal mt-9 flex flex-wrap justify-center gap-4">
+        <a
+          href={`mailto:${site.email}`}
+          class="rounded-md border border-accent/60 px-6 py-3 font-mono text-sm text-accent transition-colors hover:bg-accent/10"
+        >
+          Say hello
+        </a>
+      </div>
+      <div class="reveal mt-10 flex justify-center gap-6 text-sm text-muted">
+        <a
+          href={site.socials.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-accent hover:text-heading">GitHub</a
+        >
+        <a
+          href={site.socials.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-accent hover:text-heading">LinkedIn</a
+        >
+        <a href={`mailto:${site.email}`} class="link-accent hover:text-heading"
+          >Email</a
+        >
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line/60 py-8 text-center">
+    <p class="font-mono text-xs text-muted">
+      Built with Astro & Tailwind · © <span id="year">2025</span>
+      {site.name}
+    </p>
+  </footer>
+
+  <script>
+    import { initParticles } from "../scripts/particles";
+    import "../scripts/main";
+    initParticles();
+  </script>
+</Base>
